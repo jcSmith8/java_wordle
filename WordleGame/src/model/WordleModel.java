@@ -45,6 +45,7 @@ public class WordleModel {
 
 	public void generateCurrentWord() {
 		String word = getCurrentWord();
+		System.out.println(word);
 		this.currentWord = word.toUpperCase().toCharArray();
 	}
 
