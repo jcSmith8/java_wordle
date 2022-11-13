@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,13 +56,7 @@ public class ReadWordsRunnable implements Runnable {
 		int minimum = model.getColumnCount();
 
 		List<String> wordlist = new ArrayList<>();
-
-		String text = "usa.txt";
-		ClassLoader loader = this.getClass().getClassLoader();
-		InputStream stream = loader.getResourceAsStream(text);
-
-		BufferedReader reader = new BufferedReader(
-				new InputStreamReader(stream));
+		BufferedReader reader = new BufferedReader(new FileReader("C:/Users/glang/Documents/GitHub/java_wordle/WordleGame/src/controller/sgb-words.txt"));
 		String line = reader.readLine();
 		while (line != null) {
 			line = line.trim();
