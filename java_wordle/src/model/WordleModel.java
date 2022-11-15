@@ -82,6 +82,10 @@ public class WordleModel {
 		currentWord = wordList.get(index).toCharArray();
 	}
 	
+	public void changeCurrentCol(int num){
+		currentColumn = num;
+	}
+
 	public void setCurrentColumn(char c) {
 		currentColumn++;
 		currentColumn = Math.min(currentColumn, (columnCount - 1));
@@ -91,20 +95,20 @@ public class WordleModel {
 	}
 	
 	public void backspace() {
+		// System.out.println("GRID BEFORE: "+wordleGrid[currentRow][currentColumn]);
 		wordleGrid[currentRow][currentColumn] = null;
+		// System.out.println("GRID AFTER: "+wordleGrid[currentRow][currentColumn]);
+		// System.out.println("GUESS BEFORE: "+guess[currentColumn]);
 		guess[currentColumn] = ' ';
+		// System.out.println("GUESS AFTER: "+guess[currentColumn]);
 		this.currentColumn--;
-		this.currentColumn = Math.max(currentColumn, 0);
+		this.currentColumn = Math.max(currentColumn, -1);
 	}
 	
 	public WordleResponse[] getCurrentRow() {
-		return wordleGrid[getCurrentRowNumber()];
+		return wordleGrid[currentRow];
 	}
-	
-	public int getCurrentRowNumber() {
-		return currentRow - 1;
-	}
-	
+
 	public boolean setCurrentRow() {		
 		for (int column = 0; column < guess.length; column++) {
 			Color backgroundColor = AppColors.GRAY;
@@ -133,6 +137,15 @@ public class WordleModel {
 			}
 		}
 		
+		return false;
+	}
+
+	public boolean search(String guess){
+		for(String str : this.wordList){
+			if(str.contains(guess)){
+				return true;
+			}
+		}
 		return false;
 	}
 
