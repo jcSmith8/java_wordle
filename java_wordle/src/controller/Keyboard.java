@@ -25,7 +25,6 @@ public class Keyboard extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		// System.out.println("Action detected"+event.getSource());
 		JButton button = (JButton) event.getSource();
 		String text = button.getActionCommand();
 		switch (text) {
@@ -42,9 +41,6 @@ public class Keyboard extends AbstractAction {
 					boolean moreRows = model.setCurrentRow();
 					int greenCount = 0;
 					for (WordleResponse wordleResponse : currentRow) {
-						//view.setColor(Character.toString(wordleResponse.getChar()),
-						 //		wordleResponse.getBackgroundColor(), 
-							 //	wordleResponse.getForegroundColor());
 						if (wordleResponse.getBackgroundColor().equals(AppColors.GREEN)) {
 							greenCount++;
 						} 
@@ -52,6 +48,7 @@ public class Keyboard extends AbstractAction {
 					
 					if (greenCount >= model.getColumnCount()) {
 						view.repaintWordleGridPanel();
+						model.winner = true;
 					} else if (!moreRows) {
 						view.repaintWordleGridPanel();
 					} else {
@@ -72,11 +69,14 @@ public class Keyboard extends AbstractAction {
 			view.repaintWordleGridPanel();
 			break;
 		default:
-			model.setCurrentColumn(text.charAt(0));
-			view.repaintWordleGridPanel();
+			if(!model.winner){
+				model.setCurrentColumn(text.charAt(0));
+				view.repaintWordleGridPanel();
+			}
 			break;
 		}
 		
 	}
+
 
 }

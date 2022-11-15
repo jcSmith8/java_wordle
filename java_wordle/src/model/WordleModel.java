@@ -13,24 +13,26 @@ public class WordleModel {
 	
 	private List<String> wordList;
 
-	private final Statistics statistics;
+	// private final Statistics statistics;
 
     private final Random random;
 
     private WordleResponse[][] wordleGrid;
+	public boolean winner;
 
     public WordleModel() {
 		this.currentColumn = -1;
 		this.currentRow = 0;
 		this.columnCount = 5;
 		this.maximumRows = 6;
+		this.winner = false;
 		this.random = new Random();
 		
 		createWordList();
 		
 		this.wordleGrid = initializeWordleGrid();
 		this.guess = new char[columnCount];
-		this.statistics = new Statistics();
+		// this.statistics = new Statistics();
 	}
 
 	private void createWordList() {
@@ -169,8 +171,8 @@ public class WordleModel {
 		return wordList.size();
 	}
 
-	public Statistics getStatistics() {
-		return statistics;
-	}
+	// public Statistics getStatistics() {
+	// 	return statistics;
+	// }
 
 }

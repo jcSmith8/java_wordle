@@ -75,10 +75,6 @@ public class WordleFrame {
 		instructionsItem.addActionListener(event -> new InstructionsDialog(this));
 		helpMenu.add(instructionsItem);
 		
-		JMenuItem aboutItem = new JMenuItem("About...");
-		aboutItem.addActionListener(event -> new AboutDialog(this));
-		helpMenu.add(aboutItem);
-		
 		return menuBar;
 	}
 	
