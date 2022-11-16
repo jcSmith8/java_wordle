@@ -13,8 +13,6 @@ public class WordleModel {
 	
 	private List<String> wordList;
 
-	// private final Statistics statistics;
-
     private final Random random;
 
     private WordleResponse[][] wordleGrid;
@@ -32,7 +30,6 @@ public class WordleModel {
 		
 		this.wordleGrid = initGuessGrid();
 		this.guess = new char[colCount];
-		// this.statistics = new Statistics();
 	}
 
 	private void createWordList() {

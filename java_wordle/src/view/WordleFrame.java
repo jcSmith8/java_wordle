@@ -18,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 
 import model.WordleModel;
@@ -70,7 +71,13 @@ public class WordleFrame {
 		
 		JMenu helpMenu = new JMenu("Help");
 		menuBar.add(helpMenu);
+
+		JMenuItem newGame = new JMenuItem("New Game");
+		newGame.addActionListener(event -> frame.dispose());
+		newGame.addActionListener(event -> new WordleFrame(new WordleModel()));
+		helpMenu.add(newGame);
 		
+
 		JMenuItem instructionsItem = new JMenuItem("Instructions...");
 		instructionsItem.addActionListener(event -> new HowToPlay(this));
 		helpMenu.add(instructionsItem);
@@ -92,6 +99,19 @@ public class WordleFrame {
 		panel.add(label);
 		
 		return panel;
+	}
+
+	public JPopupMenu createWinnerPopup() {
+		System.out.println("WINNER POPUP");
+		JPopupMenu popupMenu = new JPopupMenu();
+
+		popupMenu.setBackground(Color.gray);
+		JMenuItem l = new JMenuItem("New Game");
+		popupMenu.add(l);
+ 
+		// frame.add(popupMenu);
+		// frame.setVisible(true);
+		return popupMenu;
 	}
 	
 	public void shutdown() {

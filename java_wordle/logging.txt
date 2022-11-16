@@ -2,8 +2,8 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-11-15T17:35:54</date>
-  <millis>1668562554232</millis>
+  <date>2022-11-15T20:42:08</date>
+  <millis>1668573728625</millis>
   <sequence>0</sequence>
   <logger>controller.ReadWordsRunnable</logger>
   <level>INFO</level>
@@ -12,4 +12,3 @@
   <thread>15</thread>
   <message>Created word list of 5757 words.</message>
 </record>
-</log>

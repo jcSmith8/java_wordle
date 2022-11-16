@@ -47,8 +47,11 @@ public class Keyboard extends AbstractAction {
 					}
 					
 					if (greenCount >= model.getColCount()) {
+						//view.repaintGrid();
+						//view.WinnerPopup();
 						view.repaintGrid();
 						model.winner = true;
+						//view.getFrame().setVisible(true);
 					} else if (!moreRows) {
 						view.repaintGrid();
 					} else {
