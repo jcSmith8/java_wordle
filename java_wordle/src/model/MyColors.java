@@ -2,7 +2,7 @@ package model;
 
 import java.awt.Color;
 
-public class AppColors {
+public class MyColors {
 	
 	public static Color GRAY = new Color(120, 124, 126);
 	public static Color GREEN = new Color(106, 170, 100);

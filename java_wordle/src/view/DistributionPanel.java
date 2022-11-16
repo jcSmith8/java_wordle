@@ -10,7 +10,7 @@
 
 // import javax.swing.JPanel;
 
-// import model.AppColors;
+// import model.MyColors;
 // import model.WordleModel;
 
 // public class DistributionPanel extends JPanel {
@@ -78,9 +78,9 @@
 
 // 			if (index == lastValue
 // 					&& model.getStatistics().getCurrentStreak() > 0) {
-// 				g2d.setColor(AppColors.GREEN);
+// 				g2d.setColor(MyColors.GREEN);
 // 			} else {
-// 				g2d.setColor(AppColors.GRAY);
+// 				g2d.setColor(MyColors.GRAY);
 // 			}
 			
 // 			int pixelWidth = (int) (Math.round(percentages[index] * difference)

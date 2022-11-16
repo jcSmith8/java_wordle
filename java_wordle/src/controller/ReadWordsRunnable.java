@@ -46,8 +46,8 @@ public class ReadWordsRunnable implements Runnable {
 			wordlist = new ArrayList<>();
 		}
 
-		model.setWordList(wordlist);
-		model.generateCurrentWord();
+		model.setList(wordlist);
+		model.generateWord();
 	}
 
 	private List<String> createWordList() throws IOException {

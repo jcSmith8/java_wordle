@@ -12,11 +12,11 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
-import model.AppColors;
+import model.MyColors;
 import model.WordleModel;
 import model.WordleResponse;
 
-public class WordleGridPanel extends JPanel {
+public class GuessPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,13 +28,14 @@ public class WordleGridPanel extends JPanel {
 
 	private final WordleModel model;
 
-	public WordleGridPanel(WordleFrame view, WordleModel model, int width) {
+	public GuessPanel(WordleFrame view, WordleModel model, int width) {
+
 		this.model = model;
 		this.topMargin = 0;
 		this.letterWidth = 64;
 		this.insets = new Insets(0, 6, 6, 6);
 
-		int wordWidth = (letterWidth + insets.right) * model.getColumnCount();
+		int wordWidth = (letterWidth + insets.right) * model.getColCount();
 		this.leftMargin = (width - wordWidth) / 2;
 		int height = (letterWidth + insets.bottom) * model.getMaximumRows()
 				+ 2 * topMargin;
@@ -45,13 +46,13 @@ public class WordleGridPanel extends JPanel {
 
 	private Rectangle[][] calculateRectangles() {
 		Rectangle[][] grid = new Rectangle[model.getMaximumRows()][model
-				.getColumnCount()];
+				.getColCount()];
 
 		int x = leftMargin;
 		int y = topMargin;
 
 		for (int row = 0; row < model.getMaximumRows(); row++) {
-			for (int column = 0; column < model.getColumnCount(); column++) {
+			for (int column = 0; column < model.getColCount(); column++) {
 				grid[row][column] = new Rectangle(x, y, letterWidth,
 						letterWidth);
 				x += letterWidth + insets.right;
@@ -90,7 +91,7 @@ public class WordleGridPanel extends JPanel {
 		int y = r.y + 1;
 		int width = r.width - 2;
 		int height = r.height - 2;
-		g2d.setColor(AppColors.OUTLINE);
+		g2d.setColor(MyColors.OUTLINE);
 		g2d.setStroke(new BasicStroke(3f));
 		g2d.drawLine(x, y, x + width, y);
 		g2d.drawLine(x, y + height, x + width, y + height);
@@ -101,11 +102,11 @@ public class WordleGridPanel extends JPanel {
 	private void drawWordleResponse(Graphics2D g2d,
 			WordleResponse wordleResponse, Rectangle r, Font titleFont) {
 		if (wordleResponse != null) {
-			g2d.setColor(wordleResponse.getBackgroundColor());
+			g2d.setColor(wordleResponse.getBGColor());
 			g2d.fillRect(r.x, r.y, r.width, r.height);
-			g2d.setColor(wordleResponse.getForegroundColor());
+			g2d.setColor(wordleResponse.getFGColor());
 			drawCenteredString(g2d,
-					Character.toString(wordleResponse.getChar()), r, titleFont);
+					Character.toString(wordleResponse.getLetter()), r, titleFont);
 		}
 	}
 

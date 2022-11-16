@@ -8,8 +8,8 @@ import controller.ReadWordsRunnable;
 public class WordleModel {
     private char[] currentWord, guess;
 	
-	private final int columnCount, maximumRows;
-	private int currentColumn, currentRow;
+	private final int colCount, maxRows;
+	private int currentCol, currentRow;
 	
 	private List<String> wordList;
 
@@ -21,17 +21,17 @@ public class WordleModel {
 	public boolean winner;
 
     public WordleModel() {
-		this.currentColumn = -1;
+		this.currentCol = -1;
 		this.currentRow = 0;
-		this.columnCount = 5;
-		this.maximumRows = 6;
+		this.colCount = 5;
+		this.maxRows = 6;
 		this.winner = false;
 		this.random = new Random();
 		
 		createWordList();
 		
-		this.wordleGrid = initializeWordleGrid();
-		this.guess = new char[columnCount];
+		this.wordleGrid = initGuessGrid();
+		this.guess = new char[colCount];
 		// this.statistics = new Statistics();
 	}
 
@@ -41,30 +41,30 @@ public class WordleModel {
 	}
 	
 	public void initialize() {
-		this.wordleGrid = initializeWordleGrid();
-		this.currentColumn = -1;
+		this.wordleGrid = initGuessGrid();
+		this.currentCol = -1;
 		this.currentRow = 0;
-		generateCurrentWord();
-		this.guess = new char[columnCount];
+		generateWord();
+		this.guess = new char[colCount];
 	}
 
-	public void generateCurrentWord() {
+	public void generateWord() {
 		String word = getCurrentWord();
 		System.out.println("Current word is: "+word);
 		this.currentWord = word.toUpperCase().toCharArray();
 	}
 
 	private String getCurrentWord() {
-		return wordList.get(getRandomIndex());
+		return wordList.get(getRandInd());
 	}
 
-	private int getRandomIndex() {
+	private int getRandInd() {
 		int size = wordList.size();
 		return random.nextInt(size);
 	}
 	
-	private WordleResponse[][] initializeWordleGrid() {
-		WordleResponse[][] wordleGrid = new WordleResponse[maximumRows][columnCount];
+	private WordleResponse[][] initGuessGrid() {
+		WordleResponse[][] wordleGrid = new WordleResponse[maxRows][colCount];
 
 		for (int row = 0; row < wordleGrid.length; row++) {
 			for (int column = 0; column < wordleGrid[row].length; column++) {
@@ -75,61 +75,61 @@ public class WordleModel {
 		return wordleGrid;
 	}
 	
-	public void setWordList(List<String> wordList) {
+	public void setList(List<String> wordList) {
 		this.wordList = wordList;
 	}
 	
 	public void setCurrentWord() {
-		int index = getRandomIndex();
+		int index = getRandInd();
 		currentWord = wordList.get(index).toCharArray();
 	}
 	
 	public void changeCurrentCol(int num){
-		currentColumn = num;
+		currentCol = num;
 	}
 
-	public void setCurrentColumn(char c) {
-		currentColumn++;
-		currentColumn = Math.min(currentColumn, (columnCount - 1));
-		guess[currentColumn] = c;
-		wordleGrid[currentRow][currentColumn] = new WordleResponse(c,
+	public void setCol(char c) {
+		currentCol++;
+		currentCol = Math.min(currentCol, (colCount - 1));
+		guess[currentCol] = c;
+		wordleGrid[currentRow][currentCol] = new WordleResponse(c,
 				Color.WHITE, Color.BLACK);
 	}
 	
 	public void backspace() {
-		// System.out.println("GRID BEFORE: "+wordleGrid[currentRow][currentColumn]);
-		wordleGrid[currentRow][currentColumn] = null;
-		// System.out.println("GRID AFTER: "+wordleGrid[currentRow][currentColumn]);
-		// System.out.println("GUESS BEFORE: "+guess[currentColumn]);
-		guess[currentColumn] = ' ';
-		// System.out.println("GUESS AFTER: "+guess[currentColumn]);
-		this.currentColumn--;
-		this.currentColumn = Math.max(currentColumn, -1);
+		// System.out.println("GRID BEFORE: "+wordleGrid[currentRow][currentCol]);
+		wordleGrid[currentRow][currentCol] = null;
+		// System.out.println("GRID AFTER: "+wordleGrid[currentRow][currentCol]);
+		// System.out.println("GUESS BEFORE: "+guess[currentCol]);
+		guess[currentCol] = ' ';
+		// System.out.println("GUESS AFTER: "+guess[currentCol]);
+		this.currentCol--;
+		this.currentCol = Math.max(currentCol, -1);
 	}
 	
 	public WordleResponse[] getCurrentRow() {
 		return wordleGrid[currentRow];
 	}
 
-	public boolean setCurrentRow() {		
+	public boolean setRow() {		
 		for (int column = 0; column < guess.length; column++) {
-			Color backgroundColor = AppColors.GRAY;
-			Color foregroundColor = Color.WHITE;
+			Color bgColor = MyColors.GRAY;
+			Color fgColor = Color.WHITE;
 			if (guess[column] == currentWord[column]) {
-				backgroundColor = AppColors.GREEN;
+				bgColor = MyColors.GREEN;
 			} else if (contains(currentWord, guess, column)) {
-				backgroundColor = AppColors.YELLOW;
+				bgColor = MyColors.YELLOW;
 			}
 			
 			wordleGrid[currentRow][column] = new WordleResponse(guess[column],
-					backgroundColor, foregroundColor);
+					bgColor, fgColor);
 		}
 		
-		currentColumn = -1;
+		currentCol = -1;
 		currentRow++;
-		guess = new char[columnCount];
+		guess = new char[colCount];
 		
-		return currentRow < maximumRows;
+		return currentRow < maxRows;
 	}
 	
 	private boolean contains(char[] currentWord, char[] guess, int column) {
@@ -156,15 +156,15 @@ public class WordleModel {
 	}
 	
 	public int getMaximumRows() {
-		return maximumRows;
+		return maxRows;
 	}
 
-	public int getColumnCount() {
-		return columnCount;
+	public int getColCount() {
+		return colCount;
 	}
 	
-	public int getCurrentColumn() {
-		return currentColumn;
+	public int getCurrentCol() {
+		return currentCol;
 	}
 
 	public int getTotalWordCount() {

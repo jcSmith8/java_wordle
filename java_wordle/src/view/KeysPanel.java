@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import controller.Keyboard;
-import model.AppColors;
+import model.MyColors;
 import model.WordleModel;
 
-public class KeyboardPanel {
+public class KeysPanel {
 
 	private int buttonIndex, buttonCount;
 
@@ -30,7 +30,7 @@ public class KeyboardPanel {
 
 	private final WordleModel model;
 
-	public KeyboardPanel(WordleFrame view, WordleModel model) {
+	public KeysPanel(WordleFrame view, WordleModel model) {
 		this.model = model;
 		this.buttonIndex = 0;
 		this.buttonCount = firstRow().length + secondRow().length
@@ -44,15 +44,15 @@ public class KeyboardPanel {
 		JPanel panel = new JPanel(new GridLayout(0, 1, 0, 0));
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 5, 0, 5));
 
-		panel.add(createQPanel());
-		panel.add(createAPanel());
-		panel.add(createZPanel());
+		panel.add(createFirstPanel());
+		panel.add(createSecondPanel());
+		panel.add(createThirdPanel());
 		panel.add(createTotalPanel());
 
 		return panel;
 	}
 
-	private JPanel createQPanel() {
+	private JPanel createFirstPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		Font textfont = AppFonts.getTextFont();
@@ -77,7 +77,7 @@ public class KeyboardPanel {
 		return letters;
 	}
 
-	private JPanel createAPanel() {
+	private JPanel createSecondPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		Font textfont = AppFonts.getTextFont();
@@ -102,7 +102,7 @@ public class KeyboardPanel {
 		return letters;
 	}
 
-	private JPanel createZPanel() {
+	private JPanel createThirdPanel() {
 		JPanel panel = new JPanel(new FlowLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		Font textfont = AppFonts.getTextFont();
@@ -144,7 +144,7 @@ public class KeyboardPanel {
 		Font footerFont = AppFonts.getFooterFont();
 
 		String text = String.format("%,d", model.getTotalWordCount());
-		text += " possible " + model.getColumnCount() + "-letter words!";
+		text += " possible " + model.getColCount() + "-letter words!";
 		JLabel label = new JLabel(text);
 		label.setFont(footerFont);
 		panel.add(label);
@@ -152,20 +152,20 @@ public class KeyboardPanel {
 		return panel;
 	}
 
-	public void setColor(String letter, Color backgroundColor,
-			Color foregroundColor) {
+	public void setColor(String letter, Color bgColor,
+			Color fgColor) {
 		for (JButton button : buttons) {
 			if (button.getActionCommand().equals(letter)) {
 				Color color = button.getBackground();
-				if (color.equals(AppColors.GREEN)) {
+				if (color.equals(MyColors.GREEN)) {
 					// Do nothing
-				} else if (color.equals(AppColors.YELLOW)
-						&& backgroundColor.equals(AppColors.GREEN)) {
-					button.setBackground(backgroundColor);
-					button.setForeground(foregroundColor);
+				} else if (color.equals(MyColors.YELLOW)
+						&& bgColor.equals(MyColors.GREEN)) {
+					button.setBackground(bgColor);
+					button.setForeground(fgColor);
 				} else {
-					button.setBackground(backgroundColor);
-					button.setForeground(foregroundColor);
+					button.setBackground(bgColor);
+					button.setForeground(fgColor);
 				}
 				break;
 			}

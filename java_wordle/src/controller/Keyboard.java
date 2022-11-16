@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 
-import model.AppColors;
+import model.MyColors;
 import model.WordleModel;
 import model.WordleResponse;
 import view.WordleFrame;
@@ -29,30 +29,30 @@ public class Keyboard extends AbstractAction {
 		String text = button.getActionCommand();
 		switch (text) {
 		case "Enter":
-			if (model.getCurrentColumn() >= (model.getColumnCount() - 1)) {
+			if (model.getCurrentCol() >= (model.getColCount() - 1)) {
 				WordleResponse[] currentRow = model.getCurrentRow();
 				String guess = "";
 				for (WordleResponse wordleResponse : currentRow) {
-					guess+=wordleResponse.getChar();
+					guess+=wordleResponse.getLetter();
 				}
 				guess = guess.toLowerCase();
 				boolean isRealWord = model.search(guess);
 				if(isRealWord){
-					boolean moreRows = model.setCurrentRow();
+					boolean moreRows = model.setRow();
 					int greenCount = 0;
 					for (WordleResponse wordleResponse : currentRow) {
-						if (wordleResponse.getBackgroundColor().equals(AppColors.GREEN)) {
+						if (wordleResponse.getBGColor().equals(MyColors.GREEN)) {
 							greenCount++;
 						} 
 					}
 					
-					if (greenCount >= model.getColumnCount()) {
-						view.repaintWordleGridPanel();
+					if (greenCount >= model.getColCount()) {
+						view.repaintGrid();
 						model.winner = true;
 					} else if (!moreRows) {
-						view.repaintWordleGridPanel();
+						view.repaintGrid();
 					} else {
-						view.repaintWordleGridPanel();
+						view.repaintGrid();
 					}
 				}
 				else{
@@ -60,18 +60,18 @@ public class Keyboard extends AbstractAction {
 					for(int i = 0; i<5; i++){
 						model.backspace();
 					}
-					view.repaintWordleGridPanel();
+					view.repaintGrid();
 				}
 			}
 			break;
 		case "Backspace":
 			model.backspace();
-			view.repaintWordleGridPanel();
+			view.repaintGrid();
 			break;
 		default:
 			if(!model.winner){
-				model.setCurrentColumn(text.charAt(0));
-				view.repaintWordleGridPanel();
+				model.setCol(text.charAt(0));
+				view.repaintGrid();
 			}
 			break;
 		}

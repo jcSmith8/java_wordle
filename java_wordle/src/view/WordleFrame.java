@@ -26,17 +26,17 @@ public class WordleFrame {
 	
 	private final JFrame frame;
 	
-	private final KeyboardPanel keyboardPanel;
+	private final KeysPanel keysPanel;
 	
 	private final WordleModel model;
 	
-	private final WordleGridPanel wordleGridPanel;
+	private final GuessPanel guessPanel;
 
 	public WordleFrame(WordleModel model) {
 		this.model = model;
-		this.keyboardPanel = new KeyboardPanel(this, model);
+		this.keysPanel = new KeysPanel(this, model);
 		int width = 1000;
-		this.wordleGridPanel = new WordleGridPanel(this, model, width);
+		this.guessPanel = new GuessPanel(this, model, width);
 		this.frame = createAndShowGUI();
 	}
 	
@@ -53,8 +53,8 @@ public class WordleFrame {
 		});
 		
 		frame.add(createTitlePanel(), BorderLayout.NORTH);
-		frame.add(wordleGridPanel, BorderLayout.CENTER);
-		frame.add(keyboardPanel.getPanel(), BorderLayout.SOUTH);
+		frame.add(guessPanel, BorderLayout.CENTER);
+		frame.add(keysPanel.getPanel(), BorderLayout.SOUTH);
 		
 		frame.pack();
 		frame.setLocationByPlatform(true);
@@ -72,7 +72,7 @@ public class WordleFrame {
 		menuBar.add(helpMenu);
 		
 		JMenuItem instructionsItem = new JMenuItem("Instructions...");
-		instructionsItem.addActionListener(event -> new InstructionsDialog(this));
+		instructionsItem.addActionListener(event -> new HowToPlay(this));
 		helpMenu.add(instructionsItem);
 		
 		return menuBar;
@@ -100,15 +100,15 @@ public class WordleFrame {
 	}
 
 	public void resetDefaultColors() {
-		keyboardPanel.resetDefaultColors();
+		keysPanel.resetDefaultColors();
 	}
 	
-	public void setColor(String letter, Color backgroundColor, Color foregroundColor) {
-		keyboardPanel.setColor(letter, backgroundColor, foregroundColor);
+	public void setColor(String letter, Color bgColor, Color fgColor) {
+		keysPanel.setColor(letter, bgColor, fgColor);
 	}
 	
-	public void repaintWordleGridPanel() {
-		wordleGridPanel.repaint();
+	public void repaintGrid() {
+		guessPanel.repaint();
 	}
 
 	public JFrame getFrame() {

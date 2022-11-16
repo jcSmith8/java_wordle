@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
-public class InstructionsDialog extends JDialog {
+public class HowToPlay extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,7 +27,7 @@ public class InstructionsDialog extends JDialog {
 	
 	private JEditorPane editorPane;
 	
-	public InstructionsDialog(WordleFrame view) {
+	public HowToPlay(WordleFrame view) {
 		super(view.getFrame(), "Instructions", true);
 		this.cancelAction = new CancelAction();
 		
@@ -43,7 +43,7 @@ public class InstructionsDialog extends JDialog {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
 		
-		URL url = InstructionsDialog.class.getResource("/instructions.htm");
+		URL url = HowToPlay.class.getResource("/instructions.htm");
 		
 		editorPane = new JEditorPane();
 		editorPane.setEditable(false);

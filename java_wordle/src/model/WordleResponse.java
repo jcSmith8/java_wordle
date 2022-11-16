@@ -6,23 +6,23 @@ public class WordleResponse {
 	
 	private final char c;
 	
-	private final ColorResponse colorResponse;
+	private final ResponseColor responseColor;
 
-	public WordleResponse(char c, Color backgroundColor, Color foregroundColor) {
+	public WordleResponse(char c, Color bgColor, Color fgColor) {
 		this.c = c;
-		this.colorResponse = new ColorResponse(backgroundColor, foregroundColor);
+		this.responseColor = new ResponseColor(bgColor, fgColor);
 	}
 
-	public char getChar() {
+	public char getLetter() {
 		return c;
 	}
 
-	public Color getBackgroundColor() {
-		return colorResponse.getBackgroundColor();
+	public Color getBGColor() {
+		return responseColor.getBGColor();
 	}
 
-	public Color getForegroundColor() {
-		return colorResponse.getForegroundColor();
+	public Color getFGColor() {
+		return responseColor.getFGColor();
 	}
 	
 }
