@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -42,17 +40,6 @@ public class HowToPlay extends JDialog {
 	private JPanel createMainPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 5, 5));
-		
-		URL url = HowToPlay.class.getResource("/instructions.htm");
-		
-		editorPane = new JEditorPane();
-		editorPane.setEditable(false);
-		editorPane.setContentType("text/html");
-		try {
-			editorPane.setPage(url);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		JScrollPane scrollPane = new JScrollPane(editorPane);
 		scrollPane.setPreferredSize(new Dimension(600, 480));

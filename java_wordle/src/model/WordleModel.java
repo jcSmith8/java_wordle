@@ -168,8 +168,4 @@ public class WordleModel {
 		return wordList.size();
 	}
 
-	// public Statistics getStatistics() {
-	// 	return statistics;
-	// }
-
 }

@@ -117,6 +117,8 @@ public class GuessPanel extends JPanel {
 	 * @param text The String to draw.
 	 * @param rect The Rectangle to center the text in.
 	 */
+
+	 
 	private void drawCenteredString(Graphics2D g2d, String text, Rectangle rect,
 			Font font) {
 		FontMetrics metrics = g2d.getFontMetrics(font);
