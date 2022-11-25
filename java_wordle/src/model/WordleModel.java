@@ -3,7 +3,7 @@ package model;
 import java.awt.Color;
 import java.util.List;
 import java.util.Random;
-import controller.ReadWordsRunnable;
+import controller.LoadWords;
 
 public class WordleModel {
     private char[] currentWord, guess;
@@ -33,7 +33,7 @@ public class WordleModel {
 	}
 
 	private void createWordList() {
-		ReadWordsRunnable runnable = new ReadWordsRunnable(this);
+		LoadWords runnable = new LoadWords(this);
 		new Thread(runnable).start();
 	}
 	
